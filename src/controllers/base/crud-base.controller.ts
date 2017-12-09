@@ -1,4 +1,5 @@
 import { BodyParams, Delete, Get, PathParams, Post, Put } from 'ts-express-decorators';
+import { Description, Returns, Summary } from 'ts-express-decorators/lib/swagger';
 import { BadRequest, Conflict, NotFound } from 'ts-httpexceptions';
 import { Identifiable } from '../../models/identifiable.interface';
 import { CrudRepository } from '../../repositories/base/crud-repository.interface';
@@ -8,8 +9,10 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 	constructor( private repository: CrudRepository<T, ID> ) {
 	}
 
-	@Get( '/:entityId' )
-	async getById( @PathParams( 'entityId' ) id: ID ): Promise<T> {
+	@Get( '/:id' )
+	@Summary( 'Get entity by id' )
+	@Returns( 404, { description: 'Entity does not exists' } )
+	async getById( @PathParams( 'id' ) @Description( 'identifier of entity to retrieve' ) id: ID ): Promise<T> {
 		const found = await this.repository.getById( id );
 		if ( !found ) {
 			throw new NotFound( 'Entity does not exists' );
@@ -18,19 +21,29 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 	}
 
 	@Get( '/' )
+	@Summary( 'Get all entities' )
 	async getAll(): Promise<T[]> {
 		return this.repository.getAll();
 	}
 
 	@Post( '/' )
-	async create( @BodyParams() newEntity: T ): Promise<T> {
+	@Summary( 'Create new entity' )
+	async create( @BodyParams()  @Description( 'new entity to create' ) newEntity: T ): Promise<T> {
 		// force to override id to avoid accidental update
 		newEntity.id = undefined;
 		return this.repository.save( newEntity );
 	}
 
-	@Put( '/:entityId' )
-	async update( @PathParams( 'entityId' ) existingId: ID, entityToUpdate: T ): Promise<T> {
+	@Put( '/:id' )
+	@Summary( 'Update existing entity' )
+	@Returns( 400, { description:
+			`Request body missing.
+			Identifier of existing entity missing from url.` } )
+	@Returns( 409, { description: 'Identifier in url ({ existingId }) not match with identifier in body ({ entityToUpdate.id }).' } )
+	async update(
+		@PathParams( 'id' ) @Description( 'identifier of existing entity' ) existingId: ID,
+		@BodyParams() @Description( 'modified entity to update' ) entityToUpdate: T
+	): Promise<T> {
 		if ( !entityToUpdate ) {
 			throw new BadRequest( 'Request body missing.' );
 		} else if ( !existingId ) {
@@ -48,8 +61,10 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 		}
 	}
 
-	@Delete( '/:entityId' )
-	async remove( @PathParams( 'entityId' ) id: ID ): Promise<void> {
+	@Delete( '/:id' )
+	@Summary( 'Delete an existing entity' )
+	@Returns( 404, { description: 'Entity does not exists' } )
+	async remove( @PathParams( 'id' )@Description( 'identifier of entity to remove' )  id: ID ): Promise<void> {
 		const found = this.getById( id );
 		if ( !found ) {
 			throw new NotFound( 'Entity does not exists' );

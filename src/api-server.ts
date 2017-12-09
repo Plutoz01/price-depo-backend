@@ -1,4 +1,5 @@
 import { GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings } from 'ts-express-decorators';
+import "ts-express-decorators/swagger";
 import Path = require('path');
 
 const rootDir = Path.resolve( __dirname );
@@ -12,7 +13,10 @@ const rootDir = Path.resolve( __dirname );
 		'/api/v1': '${rootDir}/controllers/**/*.js'
 	},
 	acceptMimes: [ 'application/json' ],
-	port: 3000
+	port: 3000,
+	swagger: {
+		path: "/api-docs"
+	}
 } )
 export class APIServer extends ServerLoader {
 

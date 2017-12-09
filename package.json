@@ -20,9 +20,11 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
+    "ajv": "^5.5.1",
     "compression": "^1.7.1",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
+    "swagger-ui-express": "^2.0.11",
     "ts-express-decorators": "^2.16.0",
     "ts-httpexceptions": "^3.0.0",
     "uuid": "^3.1.0"
