@@ -1,0 +1,30 @@
+{
+  "name": "price-depo-user-svc",
+  "author": "László Csatlós",
+  "license": "MIT",
+  "version": "0.0.1",
+  "main": "dist/app.js",
+  "scripts": {
+    "serve": "gulp serve",
+    "build": "gulp build",
+    "clean": "gulp clean",
+    "watch": "gulp watch"
+  },
+  "devDependencies": {
+    "@types/express": "^4.0.39",
+    "@types/node": "^8.0.57",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-typescript": "^3.2.3",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "compression": "^1.7.1",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "ts-express-decorators": "^2.16.0",
+    "ts-httpexceptions": "^3.0.0",
+    "uuid": "^3.1.0"
+  }
+}
