@@ -14,6 +14,7 @@ const rootDir = Path.resolve( __dirname );
 	},
 	acceptMimes: [ 'application/json' ],
 	port: 3000,
+	httpsPort: false,
 	swagger: {
 		path: "/api-docs"
 	}
@@ -28,12 +29,14 @@ export class APIServer extends ServerLoader {
 	public $onMountingMiddlewares(): void | Promise<any> {
 		const compress = require( 'compression' ),
 			bodyParser = require( 'body-parser' ),
+			cors = require( 'cors' ),
 			morgan = require( 'morgan' );
 
 		this
 			.use( morgan( 'dev' ) )
 			.use( GlobalAcceptMimesMiddleware )
 			.use( compress( {} ) )
+			.use( cors() )
 			.use( bodyParser.json() )
 			.use( bodyParser.urlencoded( {
 				extended: true
