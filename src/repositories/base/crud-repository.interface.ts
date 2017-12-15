@@ -5,7 +5,7 @@ export interface CrudRepository <T extends Identifiable<ID>, ID> {
 	getById( id: ID ): Promise<T | undefined>;
 	save( entity: T ): Promise<T>;
 	saveAll?( entities: T[] ): Promise<T[]>;
-	remove( id: ID ): Promise<void>;
-	removeAll?( ids: ID[] ): Promise<void>;
+	remove( id: ID ): Promise<null>;
+	removeAll?( ids: ID[] ): Promise<null>;
 	count?(): Promise<number>;
 }
