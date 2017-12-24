@@ -36,12 +36,14 @@ export abstract class InMemoryRepositoryBase <T extends Identifiable<ID>, ID> im
 			throw new Error( 'invalid entity array: ' + entities );
 		}
 	}
-	async remove( id: ID ): Promise<void> {
+	async remove( id: ID ): Promise<null> {
 		this._items.delete( id );
+		return null;
 	}
-	async removeAll( ids: ID[] ): Promise<void> {
+	async removeAll( ids: ID[] ): Promise<null> {
 		if ( !!ids && Array.isArray( ids ) ) {
 			ids.forEach( ( id: ID ) => this.remove( id ) );
+			return null;
 		} else {
 			throw new Error( 'invalid entity array: ' + ids );
 		}

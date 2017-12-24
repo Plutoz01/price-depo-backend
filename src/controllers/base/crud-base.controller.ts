@@ -1,4 +1,4 @@
-import { BodyParams, Delete, Get, PathParams, Post, Put } from 'ts-express-decorators';
+import { BodyParams, Delete, Get, PathParams, Post, Put, Status } from 'ts-express-decorators';
 import { Description, Returns, Summary } from 'ts-express-decorators/lib/swagger';
 import { BadRequest, Conflict, NotFound } from 'ts-httpexceptions';
 import { Identifiable } from '../../models/identifiable.interface';
@@ -53,7 +53,7 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 				`Identifier in url (${ existingId }) not match with identifier in body (${ entityToUpdate.id }).`
 			);
 		} else {
-			const found = this.getById( existingId );
+			const found = await this.getById( existingId );
 			if ( !found ) {
 				throw new NotFound( 'Entity to update does not exists.' );
 			}
@@ -64,8 +64,9 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 	@Delete( '/:id' )
 	@Summary( 'Delete an existing entity' )
 	@Returns( 404, { description: 'Entity does not exists' } )
-	async remove( @PathParams( 'id' )@Description( 'identifier of entity to remove' )  id: ID ): Promise<void> {
-		const found = this.getById( id );
+	@Status( 204 )
+	async remove( @PathParams( 'id' )@Description( 'identifier of entity to remove' )  id: ID ) {
+		const found = await this.getById( id );
 		if ( !found ) {
 			throw new NotFound( 'Entity does not exists' );
 		}
