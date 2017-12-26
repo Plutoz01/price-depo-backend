@@ -1,9 +1,12 @@
 export class Pageable {
-	static readonly defaultPageSize = 20;
+	static readonly defaultPageSize = 10;
+	static readonly maximumPageSize = 100;
+
 
 	static of( page = 0, size = Pageable.defaultPageSize ): Pageable {
 		page = page < 0 ? 0 : page;
 		size = size < 1 ? Pageable.defaultPageSize : size;
+		size = size > Pageable.maximumPageSize ? Pageable.maximumPageSize : size;
 		return new Pageable( page, size );
 	}
 
