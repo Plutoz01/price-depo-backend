@@ -2,6 +2,7 @@ import { BodyParams, Delete, Get, PathParams, Post, Put, QueryParams, Status } f
 import { Description, Returns, Summary } from 'ts-express-decorators/lib/swagger';
 import { BadRequest, Conflict, NotFound } from 'ts-httpexceptions';
 import { Identifiable } from '../../models/identifiable.interface';
+import { PageResponse } from '../../models/page-response.class';
 import { Pageable } from '../../models/pageable';
 import { CrudRepository } from '../../repositories/base/crud-repository.interface';
 
@@ -23,8 +24,14 @@ export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {
 
 	@Get( '/' )
 	@Summary( 'Get all entities' )
-	async getAll( @QueryParams( 'page' ) page?: number, @QueryParams( 'size' ) size?: number ): Promise<T[]> {
-		return this.repository.getAll( Pageable.of( page, size ) );
+	async getAll( @QueryParams( 'page' ) @Description( 'page number ( optional, default is 0 )' ) page?: number,
+				  @QueryParams( 'size' ) @Description( `page size ( optional, default is ${ Pageable.defaultPageSize } )` ) size?: number ): Promise<PageResponse<T>> {
+		const pageable = Pageable.of( page, size );
+		const [ items, total ]: [ T[], number ] = await Promise.all( [
+			this.repository.getAll( pageable ),
+			this.repository.count()
+		] );
+		return PageResponse.of( items, pageable, total );
 	}
 
 	@Post( '/' )

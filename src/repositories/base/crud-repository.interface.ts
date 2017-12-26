@@ -8,5 +8,5 @@ export interface CrudRepository <T extends Identifiable<ID>, ID> {
 	saveAll?( entities: T[] ): Promise<T[]>;
 	remove( id: ID ): Promise<null>;
 	removeAll?( ids: ID[] ): Promise<null>;
-	count?(): Promise<number>;
+	count(): Promise<number>;
 }
