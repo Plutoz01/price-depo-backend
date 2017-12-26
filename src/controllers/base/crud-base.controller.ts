@@ -3,7 +3,7 @@ import { Description, Returns, Summary } from 'ts-express-decorators/lib/swagger
 import { BadRequest, Conflict, NotFound } from 'ts-httpexceptions';
 import { Identifiable } from '../../models/identifiable.interface';
 import { PageResponse } from '../../models/page-response.class';
-import { Pageable } from '../../models/pageable';
+import { Pageable } from '../../models/pageable.class';
 import { CrudRepository } from '../../repositories/base/crud-repository.interface';
 
 export abstract class CrudControllerBase<T extends Identifiable<ID>, ID> {

@@ -1,5 +1,5 @@
 import { Identifiable } from './identifiable.interface';
-import { Pageable } from './pageable';
+import { Pageable } from './pageable.class';
 
 export class PageResponse<T extends Identifiable<any>> {
 

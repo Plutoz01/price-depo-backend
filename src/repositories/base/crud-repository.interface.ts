@@ -1,5 +1,5 @@
 import { Identifiable } from '../../models/identifiable.interface';
-import { Pageable } from '../../models/pageable';
+import { Pageable } from '../../models/pageable.class';
 
 export interface CrudRepository <T extends Identifiable<ID>, ID> {
 	getAll( page: Pageable ): Promise<T[]>;

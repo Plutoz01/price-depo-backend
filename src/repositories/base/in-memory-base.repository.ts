@@ -1,5 +1,5 @@
 import { Identifiable } from '../../models/identifiable.interface';
-import { Pageable } from '../../models/pageable';
+import { Pageable } from '../../models/pageable.class';
 import { CrudRepository } from './crud-repository.interface';
 
 export abstract class InMemoryRepositoryBase <T extends Identifiable<ID>, ID> implements CrudRepository<T, ID> {
