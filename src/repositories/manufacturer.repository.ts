@@ -12,7 +12,20 @@ export class ManufacturerRepository extends InMemoryRepositoryBase<Manufacturer,
 			{ name: 'Bosch', country: 'Germany' },
 			{ name: 'Toshiba', country: 'Japan' },
 			{ name: 'Siemens', country: 'Germany' },
-			{ name: 'Samsung', country: 'Korea' }
+			{ name: 'Samsung', country: 'Korea' },
+			{ name: 'Philips', country: 'Netherlands' },
+			{ name: 'Fuji', country: 'Japan' },
+			{ name: 'Canon', country: 'Japan' },
+			{ name: 'Sony', country: 'Japan' },
+			{ name: 'Acer', country: 'Taiwan' },
+			{ name: 'Kingston', country: 'USA' },
+			{ name: 'Sharp', country: 'Japan' },
+			{ name: 'Huawei', country: 'China' },
+			{ name: 'tp-link', country: 'China' },
+			{ name: 'Xiaomi', country: 'China' },
+			{ name: 'ZTE', country: 'China' },
+			{ name: 'Alcatel', country: 'France' },
+			{ name: 'Nokia', country: 'Finland' }
 		];
 
 		manufacturers.forEach( ( manufacturer: Manufacturer ) => {
