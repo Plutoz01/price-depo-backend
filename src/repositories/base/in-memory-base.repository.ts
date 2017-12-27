@@ -1,4 +1,5 @@
 import { Identifiable } from '../../models/identifiable.interface';
+import { Pageable } from '../../models/pageable.class';
 import { CrudRepository } from './crud-repository.interface';
 
 export abstract class InMemoryRepositoryBase <T extends Identifiable<ID>, ID> implements CrudRepository<T, ID> {
@@ -15,8 +16,8 @@ export abstract class InMemoryRepositoryBase <T extends Identifiable<ID>, ID> im
 		return this._items.get( id );
 	}
 
-	async getAll(): Promise<T[]> {
-		return Array.from( this._items.values() );
+	async getAll( pageable: Pageable ): Promise<T[]> {
+		return this.values.slice( pageable.firstIndex, pageable.lastIndex )
 	}
 
 	async save( entity: T ): Promise<T> {
@@ -54,6 +55,10 @@ export abstract class InMemoryRepositoryBase <T extends Identifiable<ID>, ID> im
 
 	protected get items(): Map<ID, T> {
 		return this._items;
+	}
+
+	protected get values(): Array<T> {
+		return Array.from( this._items.values() );
 	}
 
 	protected abstract generateNewIdFor( entity: T ): ID;
