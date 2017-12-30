@@ -5,10 +5,10 @@ import { Identifiable } from '../../models/identifiable.interface';
 import { FilterableCrudRepository } from '../../repositories/base/filterable-crud-repository.interface';
 import { CrudControllerBase } from './crud-base.controller';
 
-export abstract class FilterableCrudControllerBase<T extends Identifiable<ID>, ID, F extends FilterBase<string>>
+export abstract class FilterableCrudControllerBase<T extends Identifiable<ID>, ID, FK extends string>
 	extends CrudControllerBase<T, ID> {
 
-	constructor( private readonly filterableCrudRepository: FilterableCrudRepository<T, ID, F> ) {
+	constructor( private readonly filterableCrudRepository: FilterableCrudRepository<T, ID, FK> ) {
 		super( filterableCrudRepository );
 	}
 
@@ -26,8 +26,9 @@ export abstract class FilterableCrudControllerBase<T extends Identifiable<ID>, I
 								"matchType": "equals"
 							}
 						}`
-					) filter: F ): Promise<T[]> {
+					) filter: FilterBase<FK> ): Promise<T[]> {
 		// TODO: make filter results pageable
+		// TODO: restrict filter to allow only key listed in FK and reject for unlisted hits
 		return this.filterableCrudRepository.filterBy( filter );
 	}
 

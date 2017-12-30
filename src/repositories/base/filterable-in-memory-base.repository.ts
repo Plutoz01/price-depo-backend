@@ -4,16 +4,16 @@ import { FilterableRepository } from './filterable-repository.interface';
 import { InMemoryRepositoryBase } from './in-memory-base.repository';
 import * as _ from 'lodash';
 
-export abstract class FilterableInMemoryBaseRepository<T extends Identifiable<ID>, ID, F extends FilterBase<string>>
+export abstract class FilterableInMemoryBaseRepository<T extends Identifiable<ID>, ID, FK extends string>
 	extends InMemoryRepositoryBase<T, ID>
-	implements FilterableRepository<T, F> {
+	implements FilterableRepository<T, FK> {
 
-	async filterBy( filter: F ): Promise<T[]> {
+	async filterBy( filter: FilterBase<FK> ): Promise<T[]> {
 
 		const filterKeys: string[] = Object.keys( filter );
 		// TODO: some validation to check, key is member of desired filterable type
 
-		return filterKeys.reduce( ( partial: T[], filterKey: string ): T[] => {
+		return filterKeys.reduce( ( partial: T[], filterKey: FK ): T[] => {
 			return partial.filter( this.createFilterFn( filterKey, filter[ filterKey ] ) );
 		}, this.values );
 	}

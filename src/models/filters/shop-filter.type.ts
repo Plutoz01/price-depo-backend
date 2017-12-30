@@ -1,8 +1,9 @@
 import { FilterBase } from './filter.type';
 
-export type ShopFilterType
+export type ShopFilterKeys
 	= "name"
 	| "address.country"
 	| "address.postCode";
+// TODO: add additional keys
 
-export type ShopFilter = FilterBase<ShopFilterType>;
+export type ShopFilter = FilterBase<ShopFilterKeys>;
