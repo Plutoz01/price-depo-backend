@@ -9,5 +9,5 @@ export interface FilterElement {
 }
 
 export type FilterBase<T extends string> = {
-	[ K in T ]: FilterElement
-}
+	[ K in T ]: FilterElement;
+};
