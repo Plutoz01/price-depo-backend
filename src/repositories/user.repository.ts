@@ -2,7 +2,7 @@ import { Service } from 'ts-express-decorators';
 import * as uuidv4 from 'uuid/v4';
 
 import { InMemoryRepositoryBase } from './base/in-memory-base.repository';
-import { User } from '../models/user.class';
+import { User } from '../models/entitites/user.class';
 
 @Service()
 export class UserRepository extends InMemoryRepositoryBase<User, string> {

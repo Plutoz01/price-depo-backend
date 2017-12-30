@@ -1,5 +1,5 @@
 import { Controller } from 'ts-express-decorators';
-import { Manufacturer } from '../../models/manufacturer.class';
+import { Manufacturer } from '../../models/entitites/manufacturer.class';
 import { ManufacturerRepository } from '../../repositories/manufacturer.repository';
 import { CrudControllerBase } from '../base/crud-base.controller';
 

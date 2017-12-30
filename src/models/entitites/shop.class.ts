@@ -1,6 +1,6 @@
 import { JsonProperty, Required } from 'ts-express-decorators';
 import { Address } from './address.class';
-import { Identifiable } from './identifiable.interface';
+import { Identifiable } from '../identifiable.interface';
 
 export class Shop implements Identifiable<string> {
 	@JsonProperty()
