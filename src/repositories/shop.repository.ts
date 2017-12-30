@@ -17,7 +17,8 @@ export class ShopRepository extends InMemoryRepositoryBase<Shop, string> {
 					settlement: 'Bristol',
 					street: 'Baker street',
 					number: '147/A'
-				}
+				},
+				chainStoreId: 'id_tesco'
 			}
 		];
 
