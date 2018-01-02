@@ -2,11 +2,11 @@ import { Service } from 'ts-express-decorators';
 import * as uuidv4 from 'uuid/v4';
 
 import { Shop } from '../models/entitites/shop.class';
-import { ShopFilter } from '../models/filters/shop-filter.type';
+import { ShopFilterKeys } from '../models/filters/shop-filter.type';
 import { FilterableInMemoryBaseRepository } from './base/filterable-in-memory-base.repository';
 
 @Service()
-export class ShopRepository extends FilterableInMemoryBaseRepository<Shop, string, ShopFilter> {
+export class ShopRepository extends FilterableInMemoryBaseRepository<Shop, string, ShopFilterKeys> {
 
 	initializeData() {
 
