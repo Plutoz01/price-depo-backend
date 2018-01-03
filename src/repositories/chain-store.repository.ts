@@ -1,24 +1,15 @@
 import { Service } from 'ts-express-decorators';
 import * as uuidv4 from 'uuid/v4';
-import { ChainStore } from '../models/chain-store.class';
-
-import { InMemoryRepositoryBase } from './base/in-memory-base.repository';
+import { initialChainStores } from '../data/chain-store.data';
+import { ChainStore } from '../models/entitites/chain-store.class';
+import { ChainStoreFilterKeys } from '../models/filters/chain-store-filter.type';
+import { FilterableInMemoryBaseRepository } from './base/filterable-in-memory-base.repository';
 
 @Service()
-export class ChainStoreRepository extends InMemoryRepositoryBase<ChainStore, string> {
+export class ChainStoreRepository extends FilterableInMemoryBaseRepository<ChainStore, string, ChainStoreFilterKeys> {
 
 	initializeData() {
-		const initialData: ChainStore[] = [
-			{ name: 'Tesco', website: 'https://www.tesco.com' },
-			{ name: 'IKEA', website: 'http://www.ikea.com' },
-			{ name: 'Auchan', website: 'https://www.auchan-retail.com' }
-
-		];
-
-		initialData.forEach( item => {
-			const id = this.generateNewIdFor();
-			this.items.set( id, { ...item, id: id } );
-		} );
+		initialChainStores.forEach( chainStore => this.items.set( chainStore.id, chainStore ) );
 	}
 
 	protected generateNewIdFor(): string {

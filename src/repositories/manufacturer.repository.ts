@@ -1,6 +1,6 @@
 import { Service } from 'ts-express-decorators';
 import * as uuidv4 from 'uuid/v4';
-import { Manufacturer } from '../models/manufacturer.class';
+import { Manufacturer } from '../models/entitites/manufacturer.class';
 
 import { InMemoryRepositoryBase } from './base/in-memory-base.repository';
 

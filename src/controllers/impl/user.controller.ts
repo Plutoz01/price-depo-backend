@@ -1,7 +1,7 @@
 import { Controller } from 'ts-express-decorators';
 
 import { CrudControllerBase } from '../base/crud-base.controller';
-import { User } from '../../models/user.class';
+import { User } from '../../models/entitites/user.class';
 import { UserRepository } from '../../repositories/user.repository';
 
 @Controller( '/users' )

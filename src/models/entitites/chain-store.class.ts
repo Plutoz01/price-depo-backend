@@ -1,7 +1,7 @@
 import { JsonProperty, Required } from 'ts-express-decorators';
-import { Identifiable } from './identifiable.interface';
+import { Identifiable } from '../identifiable.interface';
 
-export class Manufacturer implements Identifiable<string> {
+export class ChainStore implements Identifiable<string> {
 	@JsonProperty()
 	id?: string;
 
@@ -9,5 +9,5 @@ export class Manufacturer implements Identifiable<string> {
 	name: string;
 
 	@Required()
-	country: string;
+	website: string;
 }
