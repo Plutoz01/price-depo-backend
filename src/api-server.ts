@@ -1,6 +1,10 @@
 import { GlobalAcceptMimesMiddleware, ServerLoader, ServerSettings } from 'ts-express-decorators';
 import "ts-express-decorators/swagger";
-import Path = require('path');
+import * as Path from 'path';
+import * as cors from 'cors';
+import * as morgan from 'morgan';
+import * as compression from 'compression';
+import * as bodyParser from 'body-parser';
 
 const rootDir = Path.resolve( __dirname );
 
@@ -27,15 +31,10 @@ export class APIServer extends ServerLoader {
 	 * @returns {Server}
 	 */
 	public $onMountingMiddlewares(): void | Promise<any> {
-		const compress = require( 'compression' ),
-			bodyParser = require( 'body-parser' ),
-			cors = require( 'cors' ),
-			morgan = require( 'morgan' );
-
 		this
 			.use( morgan( 'dev' ) )
 			.use( GlobalAcceptMimesMiddleware )
-			.use( compress( {} ) )
+			.use( compression( {} ) )
 			.use( cors() )
 			.use( bodyParser.json() )
 			.use( bodyParser.urlencoded( {
