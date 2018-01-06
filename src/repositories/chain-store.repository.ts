@@ -9,7 +9,9 @@ import { FilterableInMemoryBaseRepository } from './base/filterable-in-memory-ba
 export class ChainStoreRepository extends FilterableInMemoryBaseRepository<ChainStore, string, ChainStoreFilterKeys> {
 
 	initializeData() {
-		initialChainStores.forEach( chainStore => this.items.set( chainStore.id, chainStore ) );
+		initialChainStores
+			.filter( ( item ) => !!item.id )
+			.forEach( item => this.items.set( <string>item.id, item ) );
 	}
 
 	protected generateNewIdFor(): string {
