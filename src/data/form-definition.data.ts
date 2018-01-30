@@ -152,6 +152,24 @@ export const initialFormDefinitions: DynamicFormDef[] = <DynamicFormDef[]>[
 				"placeholder": "Enter product barcode",
 				"required": false
 			},
+			{
+				"type": "predefinedMultiSelect",
+				"key": "categories",
+				"label": "Categories",
+				"placeholder": "Select relevant categories",
+				"description": "Click on an item to add/remove",
+				"required": false,
+				"options": [
+					"consumer electronics",
+					"apparel (clothes, shoes... )",
+					"furniture",
+					"personal health",
+					"toys & hobby",
+					"food & beverage",
+					"books, music & video",
+					"vehicle parts & accessories"
+				]
+			},
 		]
 	}
 ];
